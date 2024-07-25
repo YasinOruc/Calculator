@@ -4,25 +4,28 @@ class Calculator
 {
     public static double DoOperation(double num1, double num2, string op)
     {
-        double result = double.NaN; 
+        double result = double.NaN; // Default value is "not-a-number" if an operation, such as division, could result in an error.
 
+        // Use a switch statement to do the math.
         switch (op)
         {
             case "a":
                 result = num1 + num2;
                 break;
             case "s":
-                result = num2 - num1;
+                result = num1 - num2;
                 break;
             case "m":
                 result = num1 * num2;
                 break;
             case "d":
+                // Ask the user to enter a non-zero divisor.
                 if (num2 != 0)
                 {
                     result = num1 / num2;
                 }
                 break;
+            // Return text for an incorrect option entry.
             default:
                 break;
         }
@@ -35,40 +38,41 @@ class Program
     static void Main(string[] args)
     {
         bool endApp = false;
-        Console.WriteLine("Console calculator in C#\r");
+        // Display title as the C# console calculator app.
+        Console.WriteLine("Console Calculator in C#\r");
         Console.WriteLine("------------------------\n");
 
         while (!endApp)
         {
+            // Declare variables and set to empty.
+            // Use Nullable types (with ?) to match type of System.Console.ReadLine
             string? numInput1 = "";
             string? numInput2 = "";
             double result = 0;
 
-
-
-            // First number.
-            Console.WriteLine("Type a number, and then press Enter"); 
+            // Ask the user to type the first number.
+            Console.Write("Type a number, and then press Enter: ");
             numInput1 = Console.ReadLine();
 
             double cleanNum1 = 0;
-            while (!double.TryParse(numInput1, out cleanNum1));
+            while (!double.TryParse(numInput1, out cleanNum1))
             {
-                Console.WriteLine("This is not a valid input. Please ente a numeric value");
+                Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput1 = Console.ReadLine();
             }
 
-            // Second number.
-            Console.WriteLine("Type another number, and then press Enter");
+            // Ask the user to type the second number.
+            Console.Write("Type another number, and then press Enter: ");
             numInput2 = Console.ReadLine();
 
             double cleanNum2 = 0;
-            while (!double.TryParse(numInput2, out cleanNum2));
+            while (!double.TryParse(numInput2, out cleanNum2))
             {
-                Console.WriteLine("This is not a valid input. Please enter a numeric value");
+                Console.Write("This is not valid input. Please enter a numeric value: ");
                 numInput2 = Console.ReadLine();
             }
 
-            // Aks the user to choose an operator.
+            // Ask the user to choose an operator.
             Console.WriteLine("Choose an operator from the following list:");
             Console.WriteLine("\ta - Add");
             Console.WriteLine("\ts - Subtract");
